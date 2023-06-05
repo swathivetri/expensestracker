@@ -12,7 +12,7 @@ selectElement.addEventListener("change", async () => {
   const token=localStorage.getItem("token");
 
   const pageno = localStorage.getItem('pageno');
-  const expenseDetails = await axios.get(`http://35.173.245.87:3000/expense/getexpenses?param1=${pageno}&param2=${rowsize}`,{headers: {"Authorization":token}});
+  const expenseDetails = await axios.get(`http://18.204.212.9:3000/expense/getexpenses?param1=${pageno}&param2=${rowsize}`,{headers: {"Authorization":token}});
             showPagination(
             expenseDetails.data.currentPage,
             expenseDetails.data.hasNextPage,
@@ -39,7 +39,7 @@ function addNewExpense(e){
     }
     console.log(expenseDetails)
     const token  = localStorage.getItem('token')
-      const adddata = axios.post('http://35.173.245.87:3000/expense/addexpense',expenseDetails,  { headers: {"Authorization" : token} })
+      const adddata = axios.post('http://18.204.212.9:3000/expense/addexpense',expenseDetails,  { headers: {"Authorization" : token} })
         .then((response) => {
 
             if(adddata)
@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', ()=> {
         showLeaderboard()
     }
 
-    const expenseDetails = axios.get('http://35.173.245.87:3000/expense/getexpenses?param1=${pageno}&param2=${pageSize}', { headers: {"Authorization" : token} })
+    const expenseDetails = axios.get('http://18.204.212.9:3000/expense/getexpenses?param1=${pageno}&param2=${pageSize}', { headers: {"Authorization" : token} })
     .then(response => {
             response.data.expenses.forEach(expense => {
 
@@ -142,7 +142,7 @@ function addNewExpensetoUI(expense){
 
 function deleteExpense(e, expenseid) {
     const token = localStorage.getItem('token')
-    axios.delete(`http://35.173.245.87:3000/expense/deleteexpense/${expenseid}`,  { headers: {"Authorization" : token} }).then(() => {
+    axios.delete(`http://18.204.212.9:3000/expense/deleteexpense/${expenseid}`,  { headers: {"Authorization" : token} }).then(() => {
 
             removeExpensefromUI(expenseid);
 
@@ -160,7 +160,7 @@ function showLeaderboard(){
     inputElement.value = 'Show Leaderboard'
     inputElement.onclick = async() => {
         const token = localStorage.getItem('token')
-        const userLeaderBoardArray = await axios.get('http://35.173.245.87:3000/premium/showLeaderBoard', { headers: {"Authorization" : token} })
+        const userLeaderBoardArray = await axios.get('http://18.204.212.9:3000/premium/showLeaderBoard', { headers: {"Authorization" : token} })
         console.log(userLeaderBoardArray)
 
         var leaderboardElem = document.getElementById('leaderboard')
@@ -184,7 +184,7 @@ downloadexpense.addEventListener('click',download);
 function download() {
     const token = localStorage.getItem('token');
     console.log(" i am download calling");
-    axios.get('http://35.173.245.87:3000/expense/download', { headers: {"Authorization" : token}})
+    axios.get('http://18.204.212.9:3000/expense/download', { headers: {"Authorization" : token}})
     .then((response) => {
         if(response.status === 200){
             console.log(response.data.fileurl);
@@ -211,7 +211,7 @@ const downloadList=document.getElementById("download-table");
     try {
         downloadList.innerHTML='';
         const token=localStorage.getItem("token");
-      axios.get("http://35.173.245.87:3000/expense/downloaddataAllFile",{headers: {"Authorization":token}})
+      axios.get("http://18.204.212.9:3000/expense/downloaddataAllFile",{headers: {"Authorization":token}})
        .then((response)=>{
             if(response.status===200){
                 console.log(response);
@@ -310,7 +310,7 @@ function downloadFile(fileUrl) {
     table.innerHTML="";
     const token=localStorage.getItem("token");
     console.log("hey i am page callin");
-    const expenseDetails = axios.get(`http://35.173.245.87:3000/expense/getexpenses?param1=${page}&param2=${pageSize}`,{headers: {"Authorization":token}})
+    const expenseDetails = axios.get(`http://18.204.212.9:3000/expense/getexpenses?param1=${page}&param2=${pageSize}`,{headers: {"Authorization":token}})
         console.log(expenseDetails.data+"dddd");
         for (let index = 0; index <expenseDetails.data.expenseDetails.length; index++) {
             display(expenseDetails.data.expenseDetails[index]);
@@ -328,7 +328,7 @@ function downloadFile(fileUrl) {
 
 document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
-    const response  = await axios.get('http://35.173.245.87:3000/purchase/premiummembership', { headers: {"Authorization" : token} });
+    const response  = await axios.get('http://18.204.212.9:3000/purchase/premiummembership', { headers: {"Authorization" : token} });
     console.log(response);
     var options =
     {
@@ -336,7 +336,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      "order_id": response.data.order.id,// For one time payment
      // This handler function will handle the success payment
      "handler": async function (response) {
-        const res = await axios.post('http://35.173.245.87:3000/purchase/updatetransactionstatus',{
+        const res = await axios.post('http://18.204.212.9:3000/purchase/updatetransactionstatus',{
              order_id: options.order_id,
              payment_id: response.razorpay_payment_id,
          }, { headers: {"Authorization" : token} })

@@ -9,7 +9,7 @@ function forgotpassword(e) {
     } 
 
     console.log(userDetails)
-    axios.post('http://35.173.245.87//password/forgotpassword',userDetails).then(response => {
+    axios.post('http://18.204.212.9//password/forgotpassword',userDetails).then(response => {
         if(response.status === 202){
             document.body.innerHTML += '<div style="color:red;">Mail Successfuly sent <div>'
             message.innerHTML="<h1>Reset Password link sent Successfully</h1>";

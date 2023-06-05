@@ -10,7 +10,7 @@ async function login(e) {
 
     }
     console.log(loginDetails)
-    const response = await axios.post('http://35.173.245.87:3000/user/login',loginDetails)
+    const response = await axios.post('http://18.204.212.9:3000/user/login',loginDetails)
     if(response.status === 200){
             alert(response.data.message)
             console.log(response.data)
